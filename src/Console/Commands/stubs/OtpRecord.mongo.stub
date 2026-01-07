@@ -1,0 +1,25 @@
+<?php
+
+namespace {{ namespace }};
+
+use MongoDB\Laravel\Eloquent\Model as Eloquent;
+
+class {{ class }} extends Eloquent
+{
+    protected $collection = 'one_time_passwords';
+
+    protected $fillable = [
+        'identifier',
+        'token',
+        'expires_at',
+    ];
+
+    public $timestamps = true;
+
+    protected $casts = [
+        'expires_at' => 'datetime',
+    ];
+
+    // Optional:
+    // protected $connection = 'mongodb';
+}

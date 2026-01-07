@@ -1,0 +1,25 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Model;
+
+class {{ class }} extends Model
+{
+    protected $table = 'one_time_passwords';
+
+    protected $fillable = [
+        'identifier',
+        'token',
+        'expires_at',
+    ];
+
+    public $timestamps = true;
+
+    /**
+     * The storage format of the model's date columns.
+     */
+    protected $casts = [
+        'expires_at' => 'datetime',
+    ];
+}
