@@ -17,6 +17,7 @@ class OtpServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 \CuongNX\LaravelFlexibleOtp\Console\Commands\CleanOtpCommand::class,
+                \CuongNX\LaravelFlexibleOtp\Console\Commands\MakeOtpListenerCommand::class,
                 \CuongNX\LaravelFlexibleOtp\Console\Commands\MakeOtpModelCommand::class,
             ]);
         }

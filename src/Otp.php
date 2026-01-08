@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
-use Cuongnx\LaravelFlexibleOtp\Events\OtpGenerated;
+use CuongNX\LaravelFlexibleOtp\Events\OtpGenerated;
 
 class Otp
 {

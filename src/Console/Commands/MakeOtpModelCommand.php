@@ -1,13 +1,12 @@
 <?php
 
-namespace Cuongnx\LaravelFlexibleOtp\Console\Commands;
+namespace CuongNX\LaravelFlexibleOtp\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-#[AsCommand(name: 'otp:make-model')]
 class MakeOtpModelCommand extends GeneratorCommand
 {
     protected $name = 'otp:make-model';

@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Listeners;
+
+use CuongNX\LaravelFlexibleOtp\Events\OtpGenerated;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
+
+class {{ class }} implements ShouldQueue
+{
+    use InteractsWithQueue;
+
+    /**
+     * Handle the OTP generated event.
+     */
+    public function handle(OtpGenerated $event): void
+    {
+        Log::info('OTP sending requested', [
+            'identifier' => $event->identifier,
+            'provider' => $event->provider,
+        ]);
+
+        $identifier = $event->identifier;
+        $otp = $event->plainOtp;
+        $provider = $event->provider;
+
+        switch ($provider) {
+            case 'speedsms':
+                // TODO: send via SpeedSMS
+                break;
+
+            case 'zalo_zns':
+                // TODO: send via Zalo ZNS
+                break;
+
+            case 'mail':
+                // TODO: send via Mail
+                break;
+
+            default:
+                Log::warning('Unknown or unsupported OTP provider', ['provider' => $provider]);
+        }
+    }
+
+    /**
+     * Handle a job failure.
+     */
+    public function failed(OtpGenerated $event, $exception): void
+    {
+        Log::error('OTP sending failed permanently', [
+            'identifier' => $event->identifier,
+            'provider' => $event->provider,
+            'exception' => $exception->getMessage(),
+        ]);
+    }
+}
