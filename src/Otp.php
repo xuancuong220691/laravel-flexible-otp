@@ -47,7 +47,7 @@ class Otp
      *
      * @return object an object with the status, message
      */
-    public function generate($originalIdentifier, $purpose = null, $type = null, $length = null, $validity = null, $resendCooldown = null, $send = false, $provider = null)
+    public function generate($originalIdentifier, $purpose = null, $type = null, $length = null, $validity = null, $resendCooldown = null, $send = false, $sendTo = null, $provider = null)
     {
         $maxAttempts = 0;
         $decayMinutes = 0;
@@ -144,13 +144,20 @@ class Otp
         $sendProvider = $provider ?? config('otp.send_provider');
 
         if ($send) {
-            Event::dispatch(new OtpGenerated($originalIdentifier, $plainOtp, $sendProvider));
-            $response = (object) [
-                'status' => true,
-                'message' => 'OTP generated and sent',
-                'resend_after' => $resendAfterSeconds,
-                'validity' => $validity,
-            ];
+            if (!$sendTo) {
+                $response = (object) [
+                    'status' => false,
+                    'message' => 'Send to is required when send is true',
+                ];
+            } else {
+                Event::dispatch(new OtpGenerated($sendTo, $plainOtp, $sendProvider));
+                $response = (object) [
+                    'status' => true,
+                    'message' => 'OTP generated and sent',
+                    'resend_after' => $resendAfterSeconds,
+                    'validity' => $validity,
+                ];
+            }
         } else {
             $response = (object) [
                 'status' => true,

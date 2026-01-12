@@ -8,13 +8,13 @@ class OtpGenerated
 {
     use Dispatchable;
 
-    public $identifier;
+    public $sendTo;
     public $plainOtp;
     public $provider;
 
-    public function __construct($identifier, $plainOtp, $provider)
+    public function __construct($sendTo, $plainOtp, $provider)
     {
-        $this->identifier = $identifier;
+        $this->sendTo = $sendTo;
         $this->plainOtp = $plainOtp;
         $this->provider = $provider;
     }
